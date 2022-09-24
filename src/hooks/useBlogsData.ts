@@ -5,6 +5,7 @@ interface useBlogs {
   blogs?: BlogData[];
   loading: boolean;
   error: string;
+  clearErrorAndReload: () => void;
 };
 
 /**
@@ -17,6 +18,11 @@ const useBlogsData = (blogsUrl: string): useBlogs => {
   const [blogs, setBlogs] = useState<BlogData[]>();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>('');
+
+  const clearErrorAndReload = () => {
+    setError('');
+    fetchBlogsData();
+  };
 
   const fetchBlogsData = useCallback(
     async () => {
@@ -55,7 +61,8 @@ const useBlogsData = (blogsUrl: string): useBlogs => {
   return {
     blogs,
     loading,
-    error
+    error,
+    clearErrorAndReload,
   };
 };
 

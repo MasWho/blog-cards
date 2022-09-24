@@ -2,16 +2,22 @@ import BlogCardsContainer from "./components/BlogCardsContainer";
 import BlogCard from "./components/BlogCard";
 import useBlogsData from "./hooks/useBlogsData";
 import LoadingSpinner from "./components/LoadingSpinner";
+import ErrorModal from "./components/ErrorModal";
 const BASE_URL = "https://people.canonical.com/~anthonydillon/wp-json/wp/v2/posts.json";
 
+/**
+ * Entry point for the blog application.
+ * @returns 
+ */
 function App() {
-  const { blogs, loading, error } = useBlogsData(BASE_URL);
+  const { blogs, loading, error, clearErrorAndReload } = useBlogsData(BASE_URL);
 
+  // Build application content based on fetching status of blog data
   let content: React.ReactNode;
   if (loading) {
     content = <LoadingSpinner />;
   } else if (!!error) {
-    content = "Error";
+    content = <ErrorModal error={error} onClose={clearErrorAndReload} />;
   } else if (!!blogs) {
     content = (
       <BlogCardsContainer>
@@ -25,7 +31,7 @@ function App() {
   return (
     <main
       className={`l-main u-vertically-center ${
-        loading ? "u-align--center" : ""
+        (loading || error) ? "u-align--center" : ""
       }`}
     >
       {content}
