@@ -1,12 +1,10 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
+    <main className='l-main u-vertically-center'>
       
-    </div>
+    </main>
   );
 }
 
