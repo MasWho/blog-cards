@@ -45,11 +45,13 @@ const BlogCard: React.FC<BlogCardProps> = (props) => {
         </h5>
       </header>
       <hr className={blogCardStyles.sectionSeparator} />
-      <img
-        className="p-card__image p-card__inner u-no-padding--top u-no-padding--bottom"
-        alt=""
-        src={imageSource}
-      />
+      <a href={contentUrl}>
+        <img
+          className="p-card__image p-card__inner u-no-padding--top u-no-padding--bottom"
+          alt=""
+          src={imageSource}
+        />
+      </a>
       <section className="p-card__inner u-no-padding--top">
         <a
           className={`p-heading--3 ${blogCardStyles.cardTitle}`}
