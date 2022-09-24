@@ -1,22 +1,34 @@
-import './App.css';
-import BlogCardsContainer from './components/BlogCardsContainer';
-import BlogCard from './components/BlogCard';
+import BlogCardsContainer from "./components/BlogCardsContainer";
+import BlogCard from "./components/BlogCard";
+import useBlogsData from "./hooks/useBlogsData";
+import LoadingSpinner from "./components/LoadingSpinner";
+const BASE_URL = "https://people.canonical.com/~anthonydillon/wp-json/wp/v2/posts.json";
 
 function App() {
-  return (
-    <main className='l-main u-vertically-center'>
+  const { blogs, loading, error } = useBlogsData(BASE_URL);
+
+  let content: React.ReactNode;
+  if (loading) {
+    content = <LoadingSpinner />;
+  } else if (!!error) {
+    content = "Error";
+  } else if (!!blogs) {
+    content = (
       <BlogCardsContainer>
-        <BlogCard 
-          topic="some topic"
-          imageSource="https://assets.ubuntu.com/v1/0f33d832-The-State-of-Robotics.jpg"
-          title="The state of robotics - august 2021"
-          contentUrl="#"
-          author='Mason'
-          authorUrl="#"
-          date="21st August 2021"
-          category='article'
-        />
+        {blogs.map((blog) => (
+          <BlogCard key={blog.data.title} {...blog.data} />
+        ))}
       </BlogCardsContainer>
+    );
+  }
+
+  return (
+    <main
+      className={`l-main u-vertically-center ${
+        loading ? "u-align--center" : ""
+      }`}
+    >
+      {content}
     </main>
   );
 }
