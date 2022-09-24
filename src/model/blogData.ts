@@ -1,3 +1,5 @@
+import moment from "moment";
+
 /**
  * This interface describes relevant strucutre for the raw
  * incoming blogs data
@@ -90,7 +92,7 @@ class BlogData {
       imageSource: rawData.featured_media,
       contentUrl: rawData.link,
       title: rawData.title.rendered,
-      date: rawData.date,
+      date: moment(rawData.date).format('DD MMMM YYYY'),
       author: authorName,
       authorUrl: authorUrl,
       topic: topic,
