@@ -52,7 +52,7 @@ const BlogCard: React.FC<BlogCardProps> = (props) => {
       />
       <section className="p-card__inner u-no-padding--top">
         <a
-          className="p-heading--3"
+          className={`p-heading--3 ${blogCardStyles.cardTitle}`}
           style={{ fontWeight: 300 }}
           href={contentUrl}
         >
