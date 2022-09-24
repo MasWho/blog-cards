@@ -1,0 +1,23 @@
+.card {
+  border-top: solid 0.2rem #772452;
+  padding: 0 0.5rem;
+}
+
+.cardHeading {
+  text-transform: uppercase;
+}
+
+.sectionSeparator {
+  border: none;
+  border-top: 1px dotted #D9D9D9;
+  color: #fff;
+  background-color: #fff;
+}
+
+.cardFooter {
+  text-transform: capitalize;
+}
+
+.cardAuthor {
+  display: inline;
+}
